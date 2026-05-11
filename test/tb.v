@@ -1,7 +1,7 @@
 `default_nettype none
 `timescale 1ns / 1ps
 
-/* Testbench for tt_um_cable_tester.
+/* Testbench for tt_um_bovi_cable_tester.
  *
  * Includes a behavioral model of the cable + far-end shorting plug. The
  * cable model lets cocotb inject per-wire opens by writing the
@@ -50,7 +50,7 @@ module tb ();
   wire VGND = 1'b0;
 `endif
 
-  tt_um_cable_tester user_project (
+  tt_um_bovi_cable_tester user_project (
 `ifdef GL_TEST
       .VPWR(VPWR),
       .VGND(VGND),

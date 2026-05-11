@@ -20,7 +20,7 @@ broken.**
 
 | Path | What it is |
 |---|---|
-| `src/project.v` | The synthesizable design — `tt_um_cable_tester` |
+| `src/project.v` | The synthesizable design — `tt_um_bovi_cable_tester` |
 | `test/tb.v` | Verilog testbench + behavioral cable/fault model |
 | `test/test.py` | Cocotb tests (continuity, fault injection, invariants) |
 | `info.yaml` | TinyTapeout project metadata + pinout |
