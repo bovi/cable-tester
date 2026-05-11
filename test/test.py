@@ -5,6 +5,8 @@
 # tb.v; we inject opens by writing dut.cable_wire_good and then wait long
 # enough for the FSM to complete two full result-update passes.
 
+import os
+
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
@@ -12,10 +14,10 @@ from cocotb.triggers import ClockCycles
 
 CLOCK_PERIOD_NS = 100  # 10 MHz simulated clock
 
-# With -DSIM_FAST, SETTLE_BITS = 3, so the settle counter rolls over every
-# 8 cycles, and a full 8-pin pass takes 8 * 8 = 64 cycles. Wait for two
-# complete passes plus margin so any in-flight accumulator has flushed.
-SETTLE_CYCLES_PER_PIN = 8
+# Keep this in sync with test/Makefile. RTL simulation sets this to 3 with
+# -DSIM_FAST; gate-level simulation uses the fabricated 13-bit settle counter.
+SETTLE_BITS = int(os.environ.get("COCOTB_SETTLE_BITS", "3"))
+SETTLE_CYCLES_PER_PIN = 1 << SETTLE_BITS
 FULL_PASS_CYCLES = 8 * SETTLE_CYCLES_PER_PIN
 WAIT_CYCLES = 2 * FULL_PASS_CYCLES + 8
 

@@ -45,10 +45,12 @@ module tt_um_cable_tester (
     reg [SETTLE_BITS-1:0]  settle;
     reg [7:0]              acc;
     reg [7:0]              result;
+    reg [7:0]              uio_sync1;
+    reg [7:0]              uio_sync2;
 
     wire        settle_done = &settle;
     wire [7:0]  drive_mask  = 8'b1 << idx;
-    wire [7:0]  sample      = uio_in & ~drive_mask;
+    wire [7:0]  sample      = uio_sync2 & ~drive_mask;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -56,7 +58,12 @@ module tt_um_cable_tester (
             settle <= {SETTLE_BITS{1'b0}};
             acc    <= 8'd0;
             result <= 8'd0;
+            uio_sync1 <= 8'd0;
+            uio_sync2 <= 8'd0;
         end else begin
+            uio_sync1 <= uio_in;
+            uio_sync2 <= uio_sync1;
+
             if (!settle_done) begin
                 settle <= settle + 1'b1;
             end else begin

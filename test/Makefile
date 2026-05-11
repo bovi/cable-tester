@@ -16,6 +16,7 @@ VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(PROJECT_SOURCES))
 # Shrink the settle-time counter so cocotb tests run in milliseconds of
 # wall-clock instead of seconds. Fab build uses the full counter.
 COMPILE_ARGS    += -DSIM_FAST
+COCOTB_SETTLE_BITS = 3
 
 else
 
@@ -31,8 +32,11 @@ VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_f
 
 # this gets copied in by the GDS action workflow
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
+COCOTB_SETTLE_BITS = 13
 
 endif
+
+export COCOTB_SETTLE_BITS
 
 # Allow sharing configuration between design and testbench via `include`:
 COMPILE_ARGS 		+= -I$(SRC_DIR)
