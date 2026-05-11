@@ -1,28 +1,25 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  title:        "Cable Tester"
+  author:       "Daniel Bovensiepen"
+  discord:      ""
+  description:  "Ethernet cable continuity tester: drives each RJ45 wire and reports per-wire pass/fail on 8 LEDs"
+  language:     "Verilog"
+  clock_hz:     25000000
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "1x1"
 
-  # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  # Your top module name must start with "tt_um_".
+  top_module:  "tt_um_cable_tester"
 
   # List your project's source files here.
-  # Source files must be in ./src and you must list each source file separately, one per line.
-  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project.v"
 
-# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+# The pinout of your project.
 pinout:
-  # Inputs
+  # Inputs (unused in this design)
   ui[0]: ""
   ui[1]: ""
   ui[2]: ""
@@ -32,25 +29,25 @@ pinout:
   ui[6]: ""
   ui[7]: ""
 
-  # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  # Outputs: per-wire pass/fail status LEDs
+  uo[0]: "WIRE0_OK (RJ45 pin 1)"
+  uo[1]: "WIRE1_OK (RJ45 pin 2)"
+  uo[2]: "WIRE2_OK (RJ45 pin 3)"
+  uo[3]: "WIRE3_OK (RJ45 pin 4)"
+  uo[4]: "WIRE4_OK (RJ45 pin 5)"
+  uo[5]: "WIRE5_OK (RJ45 pin 6)"
+  uo[6]: "WIRE6_OK (RJ45 pin 7)"
+  uo[7]: "WIRE7_OK (RJ45 pin 8)"
 
-  # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  # Bidirectional pins: cable wires
+  uio[0]: "WIRE0 (RJ45 pin 1)"
+  uio[1]: "WIRE1 (RJ45 pin 2)"
+  uio[2]: "WIRE2 (RJ45 pin 3)"
+  uio[3]: "WIRE3 (RJ45 pin 4)"
+  uio[4]: "WIRE4 (RJ45 pin 5)"
+  uio[5]: "WIRE5 (RJ45 pin 6)"
+  uio[6]: "WIRE6 (RJ45 pin 7)"
+  uio[7]: "WIRE7 (RJ45 pin 8)"
 
 # Do not change!
 yaml_version: 6

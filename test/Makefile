@@ -13,6 +13,9 @@ ifneq ($(GATES),yes)
 # RTL simulation:
 SIM_BUILD				= sim_build/rtl
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(PROJECT_SOURCES))
+# Shrink the settle-time counter so cocotb tests run in milliseconds of
+# wall-clock instead of seconds. Fab build uses the full counter.
+COMPILE_ARGS    += -DSIM_FAST
 
 else
 
